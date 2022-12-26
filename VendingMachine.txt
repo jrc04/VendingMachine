@@ -1,0 +1,57 @@
+/**
+  * Sample implementation of Vending Machine in Java
+  */
+public class VendingMachine {
+
+    //-- TWO implementations of storing the PopCan(s):
+    (1) Use Java's ArrayList of PopCan(s) to keep track on inventory
+	(2) Use an actual array of PopCan(s) to keep track on inventory
+	
+	{MEMBER VARIABLES}
+	//-- keep track of total sales
+	
+	//-- keep track of current item being processed
+	
+	//-- keep track of current balance of item being processed
+	
+	//-- determine a quantity capacity for the machine. Either constant or defined at run-time
+	
+	//-- array of strings to record transactions: "Brand,price,amount customer paid,good/bad"
+	     Note: good/bad is based on if the customer had enough funds to cover the cost
+		       Also, look into ArrayList of Strings to keep track of them
+	
+	{METHODS}
+    //-- create two constructors: 
+	(1) default --> set the current balance to $50, created the array(s) to a default capacity
+	(2) one paramter --> set the the current balance to the passing paramter, 
+        created the array(s) to a default capacity
+	(3) two paramter --> set the the current balance to the passing paramter and the capacity size
+        created the array(s)
+   
+    //-- create a method to load pop cans to the machine. Use a file to store the PopCan(s)
+         File line comma-separate format: Brand,Material,Price,Volume,Height,Radius
+   
+    //-- create a method to load pop can using prompts. It uses a loop with some condition to
+         stop it. always checking for full capacity`
+  
+    //-- create a method that passes a string as a brand name to check if there exists inventory
+	     and returns its price as a double. If no brand exists add some exception handling
+		 
+    //-- create a method to purchase a PopCan item. Two parameters: brand and amount. Use the previous
+         method to help with the transaction. If item exists, check if the customer's amount > price of
+		 the can. You can determine what the return type etc. removal of can & update total sales etc
+		 Note: the machine doesn't return back change if more the amount > price
+         ** Add a random generator that generates a random number from [0-1]. There's 7% chance that the
+		 machine will malfunction. Which implies the customer's money is eaten by the machine w/o their
+		 can item. This probability of malfunction is checked for every transaction
+
+    //-- create a method to display all the transactions upto that point. Both good/bad transactions
+         This should be a void return w/o any parameters
+		 
+	//-- create a file to take the current inventory and load into a file. Using
+	     the same file format as above: Brand,Material,Price,Volume,Height,Radius
+       
+    //-- create a toString() method to display the current inventory to the screen. This format
+         is left upto you.
+   
+   

@@ -1,0 +1,3 @@
+Coke, Aluminum, 1.50, .5, 10, 10
+Pepsi, Aluminum, 1.50, .5, 10, 10
+Sprite, Plastic, 1.50, .5, 10, 10
