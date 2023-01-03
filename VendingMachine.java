@@ -94,17 +94,19 @@ public class VendingMachine {
     //-- create a method to load pop cans to the machine. Use a file to store the PopCan(s)
         // File line comma-separate format: Brand,Material,Price,Volume,Height,Radius
         // Note from Joey: I didn't learn how to make stuff with files in class. I'll make an ArrayList.
-    public void loadMachine(double volume, int height, String name, String material, int radius, double price)
+    public boolean loadMachine(double volume, int height, String name, String material, int radius, double price)
     {
         if(inventory.size() < capacity)
         {
             PopCan newcan = new PopCan(volume, height, name, material, radius, price);
             inventory.add(newcan);
+            return true;
         }
         else
         {
             System.out.println("The machine is full.");
         }
+        return false;
     }
     //-- create a method to load pop can using prompts. It uses a loop with some condition to
          //stop it. always checking for full capacity`
@@ -244,12 +246,128 @@ public class VendingMachine {
         System.out.println(output);
     }
     //-- create a file to take the current inventory and load into a file. Using
-         //the same file format as above: Brand,Material,Price,Volume,Height,Radius
+    //the same file format as above: Brand,Material,Price,Volume,Height,Radius
     public void documentInventory()
     {
-        //WIP
+        try{
+            String[] data = new String[6];
+            String line = "";
+            File file = new File("inventory.txt");
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            while((line = br.readLine()) != null)
+            {
+                int len = line.length();
+                int pos1 = 0;
+                int pos2 = 0;
+                for(int i = 0; pos2 > -1; i++)
+                {
+                    pos2 = line.indexOf(",", pos1);
+                    /*The last token:*/
+                    System.out.println(i + " " + pos1 + " " + pos2);
+                    if(pos2 == -1 && pos1 < len)
+                    {
+                        data[i] = line.substring(pos1, len).trim();
+                    }
+                    /*The other tokens:*/
+                    else
+                    {
+                        data[i] = line.substring(pos1, pos2).trim();
+                    }
+                    pos1 = pos2 + 1;
+                }
+                if (!loadMachine(Double.parseDouble(data[3]), Integer.parseInt(data[4]), data[0], data[1], Integer.parseInt(data[5]), Double.parseDouble(data[2])))
+                {
+                    break;
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
-    
+    /**
+    public void documentInventory()
+    {
+        try
+        {
+            File file = new File("inventory.txt");
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            String temp;
+            char current;
+            String name = "";
+            String material = "";
+            double price = 0;
+            double volume = 0;
+            int height = 0;
+            int radius = 0;
+            //temppoint is recording where in the line we are
+            int temppoint = 0;
+            while((line = br.readLine()) != null)
+            {
+                for(int i = 0; i < 5; i++)
+                {
+                    temp = "";
+                    for(int j = temppoint; j < line.length(); j++)
+                    {
+                        current = line.charAt(j);
+                        // | For troubleshooting:
+                        // V
+                        //System.out.println(current);
+                        if(current == ',' && current != ' ')
+                        {
+                            temppoint++;
+                            break;
+                        }
+                        else if (current != ' ')
+                        {
+                            temp += current;
+                        }
+                        temppoint++;
+                    }
+                    //There is 100%, definitely, absolutely a better way to do this.
+                    // | Also for troubleshooting
+                    // V
+                    //System.out.println(temp);
+                    if(i == 0)
+                    {
+                        name = temp;
+                    }
+                    if(i == 1)
+                    {
+                        material = temp;
+                    }
+                    if(i == 2)
+                    {
+                        //Had to look up how to convert a string to a double and int.
+                        //Somehow this is giving me an empty string error. Need to get some sleep. We'll talk about it I guess.
+                        price = Double.parseDouble(temp);
+                    }
+                    if(i == 3)
+                    {
+                        volume = Double.parseDouble(temp);
+                    }
+                    if(i == 4)
+                    {
+                        height = Integer.parseInt(temp);
+                    }
+                    if(i == 5)
+                    {
+                        radius = Integer.parseInt(temp);
+                    }
+                }
+                loadMachine(volume, height, name, material, radius, price);
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    */    
     public void fileInventory()
     {
         try
