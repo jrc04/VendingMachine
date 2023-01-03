@@ -1,6 +1,2 @@
-This was a pretty difficult but rewarding task: I've had to search
-quite a bit to find some of the solutions to my problems. Unfortunately
-the vending machine still isn't working: One method is incomplete and there
-are probably several outright broken ones. The only one I could find is
-the loadMachine method: it won't update the inventory. I think I did the
-best I could though.
+I am writing this around midnight of the third of January. I have this tutoring meeting and 2 classes pretty much back to back to back.
+I've also been very busy this week with a lot of things, so I'm sorry I couldn't get everything running.

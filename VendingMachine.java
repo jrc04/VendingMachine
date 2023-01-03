@@ -247,7 +247,82 @@ public class VendingMachine {
          //the same file format as above: Brand,Material,Price,Volume,Height,Radius
     public void documentInventory()
     {
-        //WIP
+        try
+        {
+            File file = new File("inventory.txt");
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            String temp;
+            char current;
+            String name = "";
+            String material = "";
+            double price = 0;
+            double volume = 0;
+            int height = 0;
+            int radius = 0;
+            //temppoint is recording where in the line we are
+            int temppoint = 0;
+            while((line = br.readLine()) != null)
+            {
+                for(int i = 0; i < 5; i++)
+                {
+                    temp = "";
+                    for(int j = temppoint; j < line.length(); j++)
+                    {
+                        current = line.charAt(j);
+                        // | For troubleshooting:
+                        // V
+                        //System.out.println(current);
+                        if(current == ',' && current != ' ')
+                        {
+                            temppoint++;
+                            break;
+                        }
+                        else if (current != ' ')
+                        {
+                            temp += current;
+                        }
+                        temppoint++;
+                    }
+                    //There is 100%, definitely, absolutely a better way to do this.
+                    // | Also for troubleshooting
+                    // V
+                    //System.out.println(temp);
+                    if(i == 0)
+                    {
+                        name = temp;
+                    }
+                    if(i == 1)
+                    {
+                        material = temp;
+                    }
+                    if(i == 2)
+                    {
+                        //Had to look up how to convert a string to a double and int.
+                        //Somehow this is giving me an empty string error. Need to get some sleep. We'll talk about it I guess.
+                        price = Double.parseDouble(temp);
+                    }
+                    if(i == 3)
+                    {
+                        volume = Double.parseDouble(temp);
+                    }
+                    if(i == 4)
+                    {
+                        height = Integer.parseInt(temp);
+                    }
+                    if(i == 5)
+                    {
+                        radius = Integer.parseInt(temp);
+                    }
+                }
+                loadMachine(volume, height, name, material, radius, price);
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public void fileInventory()
